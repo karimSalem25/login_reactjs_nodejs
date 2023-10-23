@@ -1,0 +1,14 @@
+/* Home.css */
+.blue-button {
+    background-color: #007BFF; /* Change this to your desired blue color */
+    color: white; /* Text color */
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .blue-button:hover {
+    background-color: #0056b3; /* Darker shade for hover effect */
+  }
+  

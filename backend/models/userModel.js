@@ -20,8 +20,10 @@ const userSchema = new mongoose.Schema(
       default: true,
     },
     resume: {
-      type: String,
-      default: null,
+      data: Buffer, // Store the file data as a binary buffer
+      contentType: String, // Store the content type of the file (e.g., 'application/pdf')
+      fileName: String,
+      // default: null,
     },
   },
   {

@@ -1,7 +1,36 @@
-const jwt = require('jsonwebtoken')
-const bcrypt = require('bcryptjs')
-const asyncHandler = require('express-async-handler')
-const User = require('../models/userModel')
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const asyncHandler = require('express-async-handler');
+const User = require('../models/userModel');
+const upload = require('../middlewares/fileUploadMiddleware');
+
+
+const uploadCV = asyncHandler(async (req, res) => {
+    console.log("....shgal");
+    try {
+        const user = await User.findById(req.user.id);
+
+        if (!user) {
+            return res.status(404).json({ message: 'User not found' });
+        }
+
+        if (!req.file) {
+            return res.status(400).json({ message: 'No file uploaded' });
+        }
+
+        // Save file details to the user's resume field
+        user.resume.data = req.file.buffer;
+        user.resume.contentType = req.file.mimetype;
+        user.resume.fileName = req.file.originalname;
+
+        await user.save();
+
+        res.json({ message: 'CV uploaded successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: 'CV upload failed' });
+    }
+})
 
 //for register new user {public}
 const registerUser = asyncHandler(async (req, res) => {
@@ -105,5 +134,6 @@ const generateToken = (id) => {
 module.exports = {
     registerUser,
     loginUser,
-    userData
+    userData,
+    uploadCV,
 }

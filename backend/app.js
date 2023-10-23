@@ -5,7 +5,7 @@ const cors = require('cors')
 const morgan = require('morgan')
 const connectDb = require('./config/db')
 const app = express()
-
+const userRouter = require('./routes/userRouter'); // Import your user router
 //Load config
 dotenv.config({ path: '../backend/config/config.env' })
 
@@ -21,6 +21,7 @@ app.use(morgan('dev'))
 //routes
 app.use('/', require('./routes/userRouter'))
 app.use('/admin', require('./routes/adminRouter'))
+app.use('/api', userRouter); // Define the base URL for user-related routes
 
 //PORT NUMBER
 const PORT = process.env.PORT || 8080
