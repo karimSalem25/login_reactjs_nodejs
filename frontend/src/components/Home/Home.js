@@ -18,7 +18,7 @@ export default function Home() {
     setFile(e.target.files[0]);
   }
 
-  async function uploadFile() {
+  async function uploadCV() {
     if (!file) {
       alert('Please select a file to upload.');
       return;
@@ -30,7 +30,7 @@ export default function Home() {
       const formData = new FormData();
       formData.append('cv', file);
 
-      await axios.post('/api/upload-cv', formData, {
+      await axios.post(`http://127.0.0.1:8080/uploadCv`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${auth.user.token}`,
@@ -54,7 +54,7 @@ export default function Home() {
         <p>Upload your CV:</p>
         <input type="file" onChange={handleFileUpload} />
         <button
-          onClick={uploadFile}
+          onClick={uploadCV}
           className={`blue-button ${uploading ? 'disabled' : ''}`} // Apply the blue-button class
           disabled={uploading}
         >

@@ -3,6 +3,10 @@ const jwt = require('jsonwebtoken')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 
+
+  
+  
+
 const loginAdmin = asyncHandler(async (req, res) => {
     const { email, password } = req.body
 
@@ -101,4 +105,5 @@ module.exports = {
     unBlockUser,
     userData,
     saveEdit
+    
 }

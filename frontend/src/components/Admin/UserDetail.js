@@ -57,6 +57,8 @@ function UserDetails() {
         }
     };
 
+    
+
     const unBlockUser = async (_id) => {
         try {
             Swal.fire({
@@ -86,6 +88,23 @@ function UserDetails() {
             console.log(error.response.data.message);
         }
     };
+
+    const viewCV = async (userId) => {
+        try {
+          const response = await axios.get(`/api/cv/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+            responseType: 'blob',
+          });
+    
+          const url = window.URL.createObjectURL(new Blob([response.data]));
+          window.open(url);
+        } catch (error) {
+          console.error(error);
+          // Handle error
+        }
+      };
 
     return (
         <>
@@ -180,6 +199,7 @@ function UserDetails() {
                         </table>
                     </div>
                 </div>
+                <button onClick={() => viewCV(userId)}>View CV</button>
             </div>
 
 

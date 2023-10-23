@@ -5,6 +5,8 @@ const User = require('../models/userModel');
 const upload = require('../middlewares/fileUploadMiddleware');
 
 
+
+
 const uploadCV = asyncHandler(async (req, res) => {
     console.log("....shgal");
     try {
@@ -117,6 +119,8 @@ const loginUser = asyncHandler(async (req, res) => {
     }
 
 })
+
+
 
 //for get user data {private}
 const userData = asyncHandler(async (req, res) => {

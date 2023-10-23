@@ -1,3 +1,4 @@
+const { protect } = require('../middlewares/authMiddleware')
 const express = require('express')
 const route = express.Router()
 const {
@@ -5,7 +6,7 @@ const {
     registerUser,
     userData,
     uploadCV } = require('../controllers/userController')
-const { protect } = require('../middlewares/authMiddleware')
+
 
 
 
@@ -19,7 +20,8 @@ route.post('/reg', registerUser)
 route.get('/user', protect, userData)
 
 // New route for uploading CVs (protected, so only authenticated users can upload)
-route.post('/upload-cv', protect , uploadCV);
+route.post('/uploadCv', protect, uploadCV);
+
 
 
 module.exports = route
